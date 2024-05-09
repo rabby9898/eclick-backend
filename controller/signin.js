@@ -25,24 +25,26 @@ const useSignInController = async (req, res) => {
         _id: user._id,
         email: user.email,
       };
+      const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
+        expiresIn: 60 * 60 * 8,
+      });
+
+      const tokenOption = {
+        httpOnly: true,
+        secure: true,
+      };
+
+      res.cookie("token", token, tokenOption).status(200).json({
+        message: "Login successfully",
+        data: token,
+        success: true,
+        error: false,
+      });
+
+      console.log(checkPass);
+    } else {
+      throw new Error("Please check Password");
     }
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
-      expiresIn: 60 * 60 * 8,
-    });
-
-    const tokenOption = {
-      httpOnly: true,
-      secure: true,
-    };
-
-    res.cookie("token", token, tokenOption).status(200).json({
-      message: "Login successfully",
-      data: token,
-      success: true,
-      error: false,
-    });
-
-    console.log(checkPass);
   } catch (err) {
     res.json({
       message: err.message || err,

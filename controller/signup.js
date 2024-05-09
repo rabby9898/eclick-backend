@@ -10,7 +10,7 @@ const signUpController = async (req, res) => {
     console.log("user", user);
 
     if (user) {
-      throw new Error("Already user exits.");
+      throw new Error("User Already Exits.");
     }
 
     if (!email) {

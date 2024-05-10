@@ -6,7 +6,7 @@ const authToken = async (req, res, next) => {
     console.log("token", token);
 
     if (!token) {
-      return res.json({
+      return res.status(400).json({
         message: "User not logged in",
         error: true,
         success: false,
@@ -15,13 +15,13 @@ const authToken = async (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
       console.log("jwt-errror------", err);
       console.log("Decoded user", decoded);
-    });
 
-    if (err) {
-      console.log("Error Auth", err);
-    }
-    req.user.id = decoded._id;
-    next();
+      if (err) {
+        console.log("Error Auth", err);
+      }
+      req.userId = decoded?._id;
+      next();
+    });
   } catch (err) {
     res.status(400).json({
       message: err.message || err,

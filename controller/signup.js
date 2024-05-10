@@ -3,7 +3,7 @@ const userModel = require("../models/usersModel");
 
 const signUpController = async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, name, profilePic } = req.body;
 
     const user = await userModel.findOne({ email });
 
@@ -21,6 +21,9 @@ const signUpController = async (req, res) => {
     }
     if (!name) {
       throw new Error("Please provide name");
+    }
+    if (!profilePic) {
+      throw new Error("Please provide profilePic");
     }
 
     const salt = bcrypt.genSaltSync(10);

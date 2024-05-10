@@ -43,7 +43,7 @@ const useSignInController = async (req, res) => {
 
       console.log(checkPass);
     } else {
-      throw new Error("Please check Password");
+      throw new Error("Please enter the right password");
     }
   } catch (err) {
     res.json({

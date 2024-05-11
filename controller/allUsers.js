@@ -5,8 +5,8 @@ const allUsers = async (req, res) => {
     console.log("users", req.userId);
     const users = await userModel.find();
     res.json({
-      data: users,
       message: "All Users",
+      data: users,
       error: false,
       success: true,
     });

@@ -5,6 +5,7 @@ const userDetailsCOntroller = require("../controller/userDetailsCOntroller");
 const authToken = require("../middleware/authToken");
 const userLogout = require("../controller/userLogout");
 const allUsers = require("../controller/allUsers");
+const updateUser = require("../controller/updateUser");
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.get("/logout", authToken, userLogout);
 
 // admin routes
 router.get("/all-users", authToken, allUsers);
+router.post("/update-user", authToken, updateUser);
 
 module.exports = router;

@@ -11,6 +11,7 @@ const getProductController = require("../controller/product/getProduct");
 const updateProductController = require("../controller/product/updateProduct");
 const getCategory = require("../controller/product/getCategory");
 const getCategoryProduct = require("../controller/product/getCategoryProduct");
+const getProductDetails = require("../controller/product/getProductDetails");
 
 const router = express.Router();
 
@@ -29,4 +30,5 @@ router.get("/get-product", getProductController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-category", getCategory);
 router.post("/get-categoryProduct", getCategoryProduct);
+router.post("/product-details", getProductDetails);
 module.exports = router;

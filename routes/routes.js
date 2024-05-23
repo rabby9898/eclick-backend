@@ -17,6 +17,7 @@ const countAddToCartProduct = require("../controller/product/countAddToCartProdu
 const addToCartView = require("../controller/product/addToCartView");
 const updateProductQty = require("../controller/product/updateProductQty");
 const deleteCartProduct = require("../controller/product/deleteCartProduct");
+const searchProduct = require("../controller/product/seachProduct");
 
 const router = express.Router();
 
@@ -41,5 +42,6 @@ router.get("/countAddToCartProduct", authToken, countAddToCartProduct);
 router.get("/cart-view", authToken, addToCartView);
 router.post("/update-qty", authToken, updateProductQty);
 router.post("/delete-cart-product", authToken, deleteCartProduct);
+router.get("/search-product", searchProduct);
 
 module.exports = router;

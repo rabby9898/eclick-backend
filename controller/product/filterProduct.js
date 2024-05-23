@@ -1,25 +1,18 @@
 const productsModel = require("../../models/productsModel");
 
-const searchProduct = async (req, res) => {
+const filterProductController = async (req, res) => {
   try {
-    const query = req.query.q;
-
-    const regex = new RegExp(query, "i", "g");
+    const categoryList = req?.body?.category || [];
 
     const product = await productsModel.find({
-      $or: [
-        {
-          productName: regex,
-        },
-        {
-          category: regex,
-        },
-      ],
+      category: {
+        $in: categoryList,
+      },
     });
 
     res.json({
       data: product,
-      message: "Search Product list",
+      message: "product",
       error: false,
       success: true,
     });
@@ -32,4 +25,4 @@ const searchProduct = async (req, res) => {
   }
 };
 
-module.exports = searchProduct;
+module.exports = filterProductController;

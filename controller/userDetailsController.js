@@ -1,6 +1,6 @@
 const userModel = require("../models/usersModel");
 
-const userDetailsCOntroller = async (req, res) => {
+const userDetailsController = async (req, res) => {
   try {
     console.log("userId:------", req.userId);
 
@@ -22,4 +22,4 @@ const userDetailsCOntroller = async (req, res) => {
   }
 };
 
-module.exports = userDetailsCOntroller;
+module.exports = userDetailsController;

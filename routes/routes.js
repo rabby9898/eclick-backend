@@ -1,7 +1,6 @@
 const express = require("express");
 const signUpController = require("../controller/signup");
 const useSignInController = require("../controller/signin");
-const userDetailsCOntroller = require("../controller/userDetailsCOntroller");
 const authToken = require("../middleware/authToken");
 const userLogout = require("../controller/userLogout");
 const allUsers = require("../controller/allUsers");
@@ -20,12 +19,13 @@ const deleteCartProduct = require("../controller/product/deleteCartProduct");
 const searchProduct = require("../controller/product/seachProduct");
 const filterProductController = require("../controller/product/filterProduct");
 const paymentController = require("../controller/paymentController");
+const userDetailsController = require("../controller/userDetailsController");
 
 const router = express.Router();
 
 router.post("/signup", signUpController);
 router.post("/signin", useSignInController);
-router.get("/user-details", authToken, userDetailsCOntroller);
+router.get("/user-details", authToken, userDetailsController);
 router.get("/logout", authToken, userLogout);
 
 // admin routes
@@ -48,6 +48,6 @@ router.get("/search-product", searchProduct);
 router.post("/filter-product", filterProductController);
 
 // payment
-router.post("/payment", authToken, paymentController);
+router.post("/payment", paymentController);
 
 module.exports = router;

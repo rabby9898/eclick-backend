@@ -6,13 +6,15 @@ const router = require("./routes/routes");
 require("dotenv").config();
 
 const app = express();
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL, "https://eclick-ecommerce.web.app"],
-    credentials: true,
-    optionSuccessStatus: 200,
-  })
-);
+
+// Configure CORS
+const corsOptions = {
+  origin: [process.env.FRONTEND_URL, "https://eclick-ecommerce.web.app"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);

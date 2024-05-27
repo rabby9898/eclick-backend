@@ -1,4 +1,4 @@
-const userModel = require("../models/usersModel");
+const userModel = require("../models/userModel");
 
 const userDetailsController = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const userDetailsController = async (req, res) => {
 
     res.status(200).json({
       data: user,
-      message: "login successfully",
+      message: "login successful",
       error: false,
       success: true,
     });

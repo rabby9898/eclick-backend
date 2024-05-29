@@ -6,12 +6,13 @@ const authToken = async (req, res, next) => {
     console.log("token", token);
 
     if (!token) {
-      return res.status(400).json({
+      return res.json({
         message: "User not logged in",
         error: true,
         success: false,
       });
     }
+
     jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
       console.log("jwt-errror------", err);
       console.log("Decoded user", decoded);

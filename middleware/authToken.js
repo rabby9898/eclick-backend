@@ -2,18 +2,18 @@ const jwt = require("jsonwebtoken");
 
 const authToken = async (req, res, next) => {
   try {
-    const token = req.cookies?.token;
+    const token = await req.cookies?.token;
     console.log("token", token);
 
     if (!token) {
-      return res.json({
-        message: "User not logged in",
+      return res.status(400).json({
+        message: "User is not logged in!",
         error: true,
         success: false,
       });
     }
 
-    jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
+    jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, function (err, decoded) {
       console.log("jwt-errror------", err);
       console.log("Decoded user", decoded);
 

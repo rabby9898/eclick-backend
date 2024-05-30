@@ -9,9 +9,9 @@ const userDetailsController = async (req, res) => {
 
     res.status(200).json({
       data: user,
-      message: "login successful",
       error: false,
       success: true,
+      message: "User details",
     });
   } catch (err) {
     res.json({

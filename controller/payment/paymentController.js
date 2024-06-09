@@ -1,9 +1,11 @@
 const stripe = require("../../config/stripe");
 const userModel = require("../../models/userModel");
+require("dotenv").config();
 
 const paymentController = async (request, response) => {
   try {
     const { cartItems } = request.body;
+
     const user = await userModel.findOne({ _id: request.userId });
 
     const params = {
@@ -13,10 +15,13 @@ const paymentController = async (request, response) => {
       billing_address_collection: "auto",
       shipping_options: [
         {
-          shipping_rate: `shr_1PPiqkIX4OOvdPIIz1e0zYRW`,
+          shipping_rate: "shr_1PPiqkIX4OOvdPIIz1e0zYRW",
         },
       ],
       customer_email: user.email,
+      metadata: {
+        userId: request.userId,
+      },
       line_items: cartItems.map((item, index) => {
         return {
           price_data: {
@@ -28,7 +33,7 @@ const paymentController = async (request, response) => {
                 productId: item.productId._id,
               },
             },
-            unit_amount: item.productId.sellingPrice,
+            unit_amount: item.productId.sellingPrice * 100,
           },
           adjustable_quantity: {
             enabled: true,
@@ -40,7 +45,9 @@ const paymentController = async (request, response) => {
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
+
     const session = await stripe.checkout.sessions.create(params);
+
     response.status(303).json(session);
   } catch (error) {
     response.json({

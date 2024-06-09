@@ -42,8 +42,13 @@ const paymentController = async (request, response) => {
           quantity: item.quantity,
         };
       }),
-      success_url: `${process.env.FRONTEND_URL}/success`,
-      cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+      // for production
+      success_url: `https://eclick-ecommerce.web.app/success`,
+      cancel_url: `https://eclick-ecommerce.web.app/cancel`,
+
+      /*****for development******/
+      // success_url: `${process.env.FRONTEND_URL}/success`,
+      // cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
 
     const session = await stripe.checkout.sessions.create(params);

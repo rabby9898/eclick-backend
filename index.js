@@ -12,7 +12,8 @@ const corsOptions = {
   origin: [
     "http://localhost:5174",
     "http://localhost:5173",
-    "https://eclick-ecommerce.web.app",
+    "http://localhost:5000",
+    // "https://eclick-ecommerce.web.app",
   ],
   credentials: true,
 };
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 app.get("/", (req, res) => {
   res.send("E-click Server is running..");

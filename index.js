@@ -7,27 +7,12 @@ require("dotenv").config();
 
 const app = express();
 
-// Configure CORS
-// Configure CORS
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "http://localhost:5000",
-  "https://eclick-ecommerce.web.app",
-];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);

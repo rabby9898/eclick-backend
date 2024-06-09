@@ -18,8 +18,8 @@ const updateProductQty = require("../controller/product/updateProductQty");
 const deleteCartProduct = require("../controller/product/deleteCartProduct");
 const searchProduct = require("../controller/product/seachProduct");
 const filterProductController = require("../controller/product/filterProduct");
-const paymentController = require("../controller/paymentController");
 const userDetailsController = require("../controller/userDetailsController");
+const paymentController = require("../controller/payment/paymentController");
 
 const router = express.Router();
 
@@ -48,6 +48,6 @@ router.get("/search-product", searchProduct);
 router.post("/filter-product", filterProductController);
 
 // payment
-router.post("/payment", paymentController);
+router.post("/checkout", authToken, paymentController);
 
 module.exports = router;

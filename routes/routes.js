@@ -22,6 +22,7 @@ const userDetailsController = require("../controller/userDetailsController");
 const paymentController = require("../controller/payment/paymentController");
 const webhooks = require("../controller/payment/webhook");
 const orderController = require("../controller/payment/orderController");
+const allOrderController = require("../controller/payment/allOrderController");
 
 const router = express.Router();
 
@@ -53,5 +54,6 @@ router.post("/filter-product", filterProductController);
 router.post("/checkout", authToken, paymentController);
 router.post("/webhook", webhooks);
 router.get("/order-list", authToken, orderController);
+router.get("/all-order", authToken, allOrderController);
 
 module.exports = router;
